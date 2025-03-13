@@ -1,0 +1,260 @@
+/* ===============================
+   Theme Variables & Inverse Grid
+================================= */
+
+:root {
+    --text-color: black;
+    --background-color: #ffffff;
+    --modal-background: rgba(224, 224, 224, 0.8);
+    --button-background: linear-gradient(to right, #ff6347, #ff6347);
+    --button-text-color: white;
+    --detail-label-color: #ff6347;
+    --original-price-color: red;
+    --active-price-size: 1.8rem;
+    --normal-price-size: 1.5rem;
+    --grid-border-color: black;
+    --grid-gap: 15px;
+    --grid-padding: 10px;
+  }
+  
+  .dark-mode {
+    --text-color: white;
+    --background-color: #121212;
+    --modal-background: rgba(30, 30, 30, 0.9);
+    --button-background: linear-gradient(to right, #ff6347, #ff6347);
+    --button-text-color: white;
+    --detail-label-color: #ff6347;
+    --original-price-color: #ff4d4d;
+    --active-price-size: 1.8rem;
+    --normal-price-size: 1.5rem;
+    --grid-border-color: white;
+  }
+  
+  /* ===============================
+     Modal Overlay & Container
+  ================================= */
+  .product-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .product-modal-container {
+    background-color: var(--modal-background);
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* ===============================
+     Media Carousel
+  ================================= */
+  .product-modal-carousel {
+    width: 100%;
+  }
+  
+  .product-modal-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .product-modal-media {
+    width: 100%;                /* Full width of the container */
+    max-width: 500px;           /* Limit max width */
+    aspect-ratio: 1 / 1;        /* Enforce square aspect ratio */
+    max-height: 70vh;           /* Prevent overflow vertically */
+    object-fit: cover;          /* Fill the container without distortion */
+    border-radius: 10px;        /* Optional: rounded corners */
+    background-color: #f0f0f0;  /* Fallback color while media loads */
+    margin: 0 auto;             /* Center the media */
+  }
+  
+  
+  /* ===============================
+     Info Section & Pricing
+  ================================= */
+  .product-modal-info {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .product-modal-title,
+  .product-modal-section-title {
+    color: var(--text-color);
+    margin-bottom: 10px;
+  }
+  
+  /* Detail label styling */
+  .product-modal-label {
+    font-weight: bold;
+    color: var(--detail-label-color);
+    margin-right: 5px;
+    justify-content: center;
+  }
+  
+  /* Pricing Styles */
+  .product-modal-price {
+    margin: 10px 0;
+  }
+  .product-modal-normal-price {
+    margin: 10px 0;
+    font-size: 1.5rem;
+  }
+  .product-modal-original-price {
+    text-decoration: line-through;
+    color: var(--original-price-color);
+    font-size: var(--normal-price-size);
+    margin-right: 10px;
+  }
+  .product-modal-discounted-price {
+    font-size: var(--active-price-size);
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  .product-modal-normal-price span {
+    font-size: var(--active-price-size);
+    font-weight: bold;
+  }
+  /* Arrow Buttons Styling */
+  .product-modal-arrow-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px; /* Space below the media */
+  }
+  
+  /* Arrow Buttons Styling */
+  .product-modal-arrow {
+    background-color: var(--btn-bg);
+    color: var(--inverted-button-text);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-modal-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+/* Position left arrow to the bottom-left */
+.product-modal-arrow.left {
+  left: 10px; /* Align left */
+}
+
+/* Position right arrow to the bottom-right */
+.product-modal-arrow.right {
+  right: 10px; /* Align right */
+}
+
+/* Hover effect */
+.product-modal-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Ensure parent container is positioned correctly */
+.product-modal-carousel {
+  position: relative; /* Needed for absolute positioning of arrows */
+  width: 100%;
+}
+
+  
+  /* ===============================
+     Details Grid (with Inverse Borders)
+  ================================= */
+  .product-modal-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--grid-gap);
+    padding: var(--grid-padding);
+    border: 2px solid var(--grid-border-color);
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .product-modal-details-grid .grid-item {
+    border-bottom: 1px solid var(--grid-border-color);
+    padding: var(--grid-padding);
+  }
+  .product-modal-details-grid .grid-item:last-child {
+    border-bottom: none;
+  }
+  .product-modal-details-grid .grid-label {
+    font-weight: bold;
+    color: var(--detail-label-color);
+    margin-bottom: 5px;
+  }
+  .product-modal-details-grid .grid-value {
+    color: var(--text-color);
+  }
+  
+  /* ===============================
+     Form Sections
+  ================================= */
+  .form-section {
+    margin-bottom: 20px;
+  }
+  
+  /* Ensure all detail texts use the theme text color */
+  .product-modal-dimension-content p,
+  .product-modal-description,
+  .product-modal-weight p,
+  .product-modal-quantity p {
+    margin: 5px 0;
+    color: var(--text-color) !important;
+  }
+  
+  /* ===============================
+     Purchase Button
+  ================================= */
+  .product-modal-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .product-modal-purchase-button {
+    padding: 12px 24px;
+    background: var(--button-background);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1.2rem;
+    text-align: center;
+    display: inline-block;
+  }
+  .product-modal-sale-end {
+    
+   
+    justify-self: center;
+    padding: 10px;
+    margin-top: 0%;
+  }
+  .sale-end-product-modal-label {
+    color: white;
+  }

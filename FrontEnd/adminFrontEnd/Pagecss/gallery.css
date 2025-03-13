@@ -1,0 +1,168 @@
+.gallery-container {
+  /* Full page height with scrolling */
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: var(--body-overlay);
+  padding: 20px;
+  margin: 0;
+}
+
+/* Button to add new images */
+.add-image-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--btn-bg, #007bff);
+  color: var(--inverted-button-text, #fff);
+  border: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+
+/* 
+  A responsive grid for Instagram-like squares.
+  We use minmax(100px, 1fr) so each cell is at least 100px wide,
+  but it flexes up to fill the row.
+*/
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 8px;
+  margin-top: 20%;
+}
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+/* Each item container for the image */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.shake-container.shake {
+  animation: shake 0.7s infinite;
+}
+
+/* Shake container applies the shake animation */
+.shake-container {
+  display: block;
+  /* Other styling for the image container, if needed */
+}
+
+.gallery-item:hover {
+  border-color: var(--btn-bg, #007bff);
+}
+
+/* The image that fills the item. 
+   Use object-fit: cover to maintain aspect ratio,
+   making the tile look like a square (or near-square).
+*/
+.gallery-image {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Ensures a square ratio (if supported) */
+  object-fit: cover;   /* Crop the image to fill the container */
+  display: block;
+}
+
+/* The red delete icon (hidden by default; shown on long press) */
+.delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  /* Ensure the delete icon doesn't inherit the transform from shake */
+  transform: none;
+  z-index: 10; /* Make sure it stays on top */
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* When in delete mode, show the delete icon */
+.delete-mode .delete-icon {
+  opacity: 1;
+}
+
+
+/* Modal Overlay (dims background) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--body-overlay, rgba(0, 0, 0, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--container-bg, #ffffff);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+/* Larger image in the modal */
+.modal-img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* Confirmation area for delete */
+.confirmation-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Close modal button */
+.close-modal-btn,
+.confirm-delete-btn,
+.cancel-delete-btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the "Confirm" (danger) and "Cancel" buttons differently */
+.confirm-delete-btn {
+  background-color: var(--price-color, #dc3545);
+  color: #fff;
+}
+.cancel-delete-btn {
+  background-color: #666;
+  color: #fff;
+}

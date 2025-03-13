@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { userApi } from '../config/axios';  // Assuming userApi is configured for user endpoints
+import React, { useState, useEffect, useRef } from 'react';
+import { userApi } from '../config/axios';
 import '../Pagecss/inappmessaging.css';
+import LoadingPage from '../Components/loading'; // Import the loading component
 
 const UserMessaging = () => {
   const [selectedThreadId, setSelectedThreadId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [messageBody, setMessageBody] = useState('');
-  const [userUsername, setUserUsername] = useState('');  // Logged-in user's username
-  const receiverUsername = 'admin';  // Assuming you're messaging the admin, adjust if dynamic
+  const [userUsername, setUserUsername] = useState('');
+  const [loading, setLoading] = useState(true); // Add loading state for initial load
+  const [sending, setSending] = useState(false); // Add sending state for sending messages
+  const receiverUsername = 'admin';
+  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
-  // Get the threadId based on the senderUsername and receiverUsername
   const getThreadId = async () => {
     try {
       const { data } = await userApi.get('/user-message-routes/get-thread', {
         params: {
-          senderUsername: userUsername,   // Pass the logged-in user's username
-          receiverUsername: receiverUsername   // Pass the receiver's username (e.g., admin)
-        }
+          senderUsername: userUsername,
+          receiverUsername: receiverUsername,
+        },
       });
-
       if (data.threadId) {
-        setSelectedThreadId(data.threadId);  // Set the threadId in the state
-        console.log('ThreadId:', data.threadId);
+        setSelectedThreadId(data.threadId);
         return data.threadId;
       }
-
       return null;
     } catch (err) {
       console.error('Failed to get thread', err);
@@ -32,117 +33,180 @@ const UserMessaging = () => {
     }
   };
 
-  // Fetch messages for the thread
   const fetchMessages = async (threadId) => {
     try {
-      const { data: messageData } = await userApi.get(`/user-message-routes/fetch-messages-by-thread?threadId=${threadId}`);
+      const { data: messageData } = await userApi.get(
+        `/user-message-routes/fetch-messages-by-thread?threadId=${threadId}`
+      );
       setMessages(messageData.messages);
+      scrollToBottom();
     } catch (error) {
       console.error('Error fetching messages:', error);
+    } finally {
+      setLoading(false); // Stop loading after fetching messages
     }
   };
 
-  // Check for the threadId and load messages on mount
   const checkThreadAndLoadMessages = async () => {
-    const threadId = await getThreadId();  // Get or create the threadId
+    const threadId = await getThreadId();
     if (threadId) {
-      fetchMessages(threadId);  // Fetch the messages for the thread
+      await fetchMessages(threadId);
+    } else {
+      setLoading(false); // Stop loading if no thread is found
     }
   };
 
-  // Fetch the user's data and check thread on mount
   useEffect(() => {
-    // Assume userUsername is fetched from an auth context or cookie
-    setUserUsername('currentLoggedInUser');  // Set the logged-in user's username dynamically
-
+    setUserUsername('currentLoggedInUser'); // Replace with dynamic user logic if applicable
     checkThreadAndLoadMessages();
   }, []);
 
-  // Send a message (create a thread if it doesn't exist)
   const sendMessage = async () => {
-    if (!messageBody) {
-      console.error('Message body cannot be empty');
-      return;
-    }
+    if (!messageBody) return;
 
+    setSending(true); // Start the sending state
     try {
-      let threadId = selectedThreadId;
-
-      // If no threadId exists, allow backend to create one dynamically
       const { data } = await userApi.post('/user-message-routes/send-message', {
-        messageBody,      // The input message content
-        threadId,         // Use the existing or pass null to create a new thread
-        senderUsername: userUsername,  // Send current user as the sender
-        receiverUsername: receiverUsername  // Send admin as the receiver
+        messageBody,
+        threadId: selectedThreadId,
+        senderUsername: userUsername,
+        receiverUsername: receiverUsername,
       });
-
-      // Set the threadId if it was just created
-      if (!threadId && data.threadId) {
-        setSelectedThreadId(data.threadId);
-      }
-
-      setMessageBody('');  // Clear input field after sending
-      fetchMessages(data.threadId || threadId);  // Refetch messages to update the UI
-
+      setMessageBody('');
+      await fetchMessages(data.threadId || selectedThreadId); // Reload messages after sending
     } catch (error) {
       console.error('Error sending message:', error);
+    } finally {
+      setSending(false); // Stop the sending state
     }
   };
 
-  // Render messages with styling based on the sender's role
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const renderMessages = () => {
     return messages.map((message, index) => {
-      const isAdmin = message.senderRole === 'admin';
-
-      const messageStyle = {
-        backgroundColor: isAdmin ? 'white' : 'orange',
-        color: isAdmin ? 'black' : 'white',
-        padding: '10px',
-        borderRadius: '10px',
-        marginBottom: '10px',
-        alignSelf: isAdmin ? 'flex-start' : 'flex-end',
-        maxWidth: '60%',
-        textAlign: isAdmin ? 'left' : 'right'  // Align text based on sender role
-      };
+      const isAdminMessage = message.senderUsername === 'NULL' || message.senderUsername === null;
+      const timestamp = new Date(message.createdAt).toLocaleString();
 
       return (
-        <li key={index} style={messageStyle}>
-          <strong>{isAdmin ? 'Admin' : 'You'}</strong>:
-          <div>{message.messageBody}</div>
-        </li>
+        <div
+          key={index}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: isAdminMessage ? 'flex-start' : 'flex-end',
+            marginBottom: '15px',
+          }}
+        >
+          <li
+            style={{
+              backgroundColor: isAdminMessage ? 'orange' : 'white',
+              color: isAdminMessage ? 'white' : 'black',
+              padding: '10px',
+              borderRadius: '8px',
+              maxWidth: '70%',
+            }}
+          >
+            <div>{message.messageBody}</div>
+          </li>
+          <div
+            style={{
+              fontSize: '0.8rem',
+              color: isAdminMessage ? '#ddd' : '#555',
+              marginTop: '2px',
+              alignSelf: isAdminMessage ? 'flex-start' : 'flex-end',
+            }}
+          >
+            {timestamp}
+          </div>
+        </div>
       );
     });
   };
 
-  return (
-    <div className={`messaging-interface ${selectedThreadId ? 'thread-selected' : ''}`}>
-      <div className="messaging-body">
-        <h3>Conversation with Admin</h3>
-
-        {/* Display messages if a thread is selected */}
+  return loading ? (
+    <LoadingPage /> // Display loading page during initial loading
+  ) : (
+    <div style={{ padding: '10px', fontFamily: 'Arial, sans-serif' }}>
+      <div style={{ marginTop: '100px' }}>
+        <h3 style={{ fontFamily: 'Arial, sans-serif' }}>Conversation with Admin</h3>
         {selectedThreadId && messages.length > 0 ? (
-          <ul className="message-list" style={{ listStyle: 'none', padding: 0 }}>
+          <ul
+            ref={messagesContainerRef}
+            style={{
+              listStyle: 'none',
+              padding: 0,
+              height: 'calc(100vh - 160px)', // Dynamically calculate height based on footer
+              overflowY: 'auto', // Make the message container scrollable
+              paddingBottom: '60px', // Ensure space for the footer
+            }}
+          >
             {renderMessages()}
+            <div ref={messagesEndRef} />
           </ul>
         ) : (
-          <p>No conversation yet. Start by typing a message.</p>
+          <p style={{ fontFamily: 'Arial, sans-serif' }}>
+            No conversation yet. Start by typing a message.
+          </p>
         )}
-
-        {/* Message input field */}
+        {sending && <LoadingPage />} {/* Show loading animation during message send */}
         <form
           onSubmit={(e) => {
             e.preventDefault();
             sendMessage();
           }}
+          style={{ fontFamily: 'Arial, sans-serif' }}
         >
-          <input
-            type="text"
-            value={messageBody}
-            onChange={(e) => setMessageBody(e.target.value)}
-            placeholder="Type a message to Admin"
-            style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
-          />
-          <button type="submit">Send</button>
+          <div
+            style={{
+              position: 'fixed',
+              bottom: '0',
+              left: '0',
+              width: '100%',
+              backgroundColor: '#fff',
+              padding: '10px',
+              boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
+              zIndex: '0',
+            }}
+          >
+            <input
+              type="text"
+              value={messageBody}
+              onChange={(e) => setMessageBody(e.target.value)}
+              placeholder="Type a message to Admin"
+              style={{
+                width: '90%',
+                padding: '10px',
+                fontFamily: 'Arial, sans-serif',
+                borderRadius: '4px',
+                border: '1px solid #ccc',
+                marginBottom: '10px',
+              }}
+              disabled={sending} // Disable input while sending
+            />
+            <button
+              className="message-send-button"
+              type="submit"
+              style={{
+                padding: '10px 15px',
+                fontFamily: 'Arial, sans-serif',
+                backgroundColor: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+              disabled={sending} // Disable button while sending
+            >
+              {sending ? 'Sending...' : 'Send'}
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -150,15 +214,3 @@ const UserMessaging = () => {
 };
 
 export default UserMessaging;
-
-
-
-
-
-
-
-
-
-
-
-

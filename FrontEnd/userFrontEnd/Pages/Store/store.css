@@ -1,0 +1,359 @@
+/* Store Container */
+.store-container {
+  padding: 2%;
+  margin-top: 10%;
+  height: 100% ;
+  
+}
+
+.store-container h2 {
+  font-size: calc(3rem + 2vw); /* Responsive header font size */
+  color: black;
+  text-align: center;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive columns */
+  gap: 16px;
+  
+}
+
+/* Product Tile */
+.product-tile {
+  background-color: #000000ab;
+  border: 1px solid #dddddd59;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 200px;
+  cursor: pointer;
+}
+
+/* Product Info */
+.product-info img {
+  
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.tile-section {
+  background-color: #f8f9fac3; /* Fallback color for browsers that don't support gradients */
+  padding: 3px;
+  margin: 10px;
+  color: black;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, #909090, #f9f9f9); /* Remove the trailing comma */
+}
+
+.product-info h3 {
+  color: white;
+  font-size: 1.8rem;
+}
+
+.product-info p {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: white;
+}
+
+/* Modal Styling */
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* Dimmed background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #555555ce;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  max-height: 500px; /* Ensures a square modal */
+  width: 90vw; /* Responsive width */
+  height: 90vw; /* Responsive height, limited by max-height */
+  overflow-y: auto; /* Scroll inside if content overflows */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+/* Close Button */
+.modal-content .close-modal {
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  padding: 5px 10px;
+  z-index: 1101;
+}
+
+/* Modal Title */
+.modal-content h3 {
+  font-family: "Dancing Script", cursive;
+  font-size: 2rem;
+  color: white;
+  margin-top: 10px;
+}
+
+/* Modal Image */
+.modal-content img {
+  width: 200px;
+  height: 200px;
+  
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Modal Text */
+.modal-content p {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: black;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    width: 90vw;
+    height: 90vw;
+  }
+
+  .modal-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .modal-content img {
+    max-height: 150px;
+  }
+}
+
+
+.modal-content .close-modal {
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.modal-content h4 {
+  background-color: rgba(0, 0, 0, 0.616);
+  color: white;
+  margin: 15px 0;
+}
+
+.modal-content p {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: black;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 10px auto; /* Centers the element horizontally */
+  text-align: center; /* Centers the text inside the <p> element */
+  width: fit-content; /* Ensures it doesn't stretch beyond its content */
+}
+
+
+/* Button Styling */
+button {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #ff6347;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+button:disabled {
+  background-color: #ff9a8d;
+}
+
+button:hover:not(:disabled) {
+  background-color: #e04b50;
+}
+
+/* Cart Message */
+.cart-message {
+  position: fixed;
+  top: 20px;
+  right: -300px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  z-index: 3000;
+  transition: transform 0.5s ease-in-out;
+}
+
+.cart-message.slide-in {
+  transform: translateX(-320px);
+}
+
+.cart-message.slide-out {
+  transform: translateX(300px);
+}
+
+/* Media Queries */
+
+
+.modal-content h4 {
+  background-color: rgba(0, 0, 0, 0.61);
+  color: white;
+  margin: 15px 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); /* Adds shadow to the "Description" header */
+  
+}
+
+.modal-content p {
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  color: black;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.modal-descriptor{
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  
+}
+
+.modal-content .price {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds a stronger shadow to the price */
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dimensions-container {
+  display: flex; /* Aligns columns side-by-side */
+  justify-content: space-between; /* Ensures space between columns */
+  gap: 20px; /* Adds spacing between the columns */
+  padding: 20px; /* Adds padding inside the container */
+  background-color: #f8f9fa; /* Light background for contrast */
+  border-radius: 8px; /* Smooth corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.dimensions-column {
+  flex: 1; /* Ensures columns take equal width */
+  text-align: left; /* Aligns text to the left */
+}
+
+.dimensions-column p {
+  margin: 5px 0; /* Adds spacing between the rows */
+  font-family: Arial, sans-serif; /* Sets a clean font */
+  font-size: 1rem; /* Adjusts font size */
+  color: #333; /* Dark text for readability */
+}
+
+.dimensions-column strong {
+  font-size: 1.2rem; /* Highlights the column headers */
+  color: #555; /* Slightly lighter color for differentiation */
+  text-transform: uppercase; /* Optional: Makes headers uppercase */
+}
+
+.dimensions-container p:first-of-type {
+  margin-top: 0; /* Removes extra margin for the first item */
+}
+
+.dimensions-container p:last-of-type {
+  margin-bottom: 0; /* Removes extra margin for the last item */
+}
+
+
+.carousel {
+  position: relative; /* To allow button positioning relative to this container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.carousel-slide {
+  width: 100%;
+  height: auto;
+  max-height: 60vh; /* Ensures the media fits within 60% of the viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensures no overflow outside the container */
+}
+.carousel-slide img,
+.carousel-slide video {
+  max-width: 100%; /* Ensure the media does not exceed the container width */
+  max-height: 100%; /* Ensure the media does not exceed the container height */
+  object-fit: contain; /* Maintain aspect ratio and ensure the entire media is visible */
+}
+
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure buttons are above the carousel */
+  font-size: 1.2rem;
+  border-radius: 50%;
+}
+
+.carousel button:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly darker on hover */
+}
+
+.carousel button:disabled {
+  background-color: rgba(0, 0, 0, 0.2); /* Lighter when disabled */
+  cursor: not-allowed;
+}
+
+.carousel .prev {
+  left: 10px; /* Position the left button */
+
+}
+
+.carousel .next {
+  right: 10px; /* Position the right button */
+}
+
