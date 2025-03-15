@@ -1,182 +1,156 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import moment from 'moment';
-import './Home.css';
 import { registerApi } from '../../config/axios';
+import './Home.css';
 
-// Import images
-import img1 from '../../assets/img1.webp';
-import img2 from '../../assets/img2.webp';
-import img3 from '../../assets/img3.webp';
-import img4 from '../../assets/img4.webp';
-import img5 from '../../assets/img5.webp';
-import img6 from '../../assets/img6.webp';
+/* Import images */
+import heroImage from '../../assets/inspired-life.webp';
+import oneOnOneImage from '../../assets/one-on-one.webp';
+import couplesImage from '../../assets/couples.webp';
+import groupImage from '../../assets/group.webp';
 
-// Import other components
+/* Other components */
 import SocialLinks from '../../Components/navbar/socialLinks';
-import CollageOverlay from './CollageOverlay';
-import DancingScript from '../../assets/CarnivaleeFreakshow-DLrm.ttf'
 
 const Home = () => {
-  const [featuredProducts, setFeaturedProducts] = useState([]);                       
+  const [availableSessions, setAvailableSessions] = useState([]);
   const [upcomingEvent, setUpcomingEvent] = useState(null);
-  const [fontLoaded, setFontLoaded] = useState(false)
+
+  // Framer Motion hooks for scroll-based fade-out
+  const { scrollYProgress } = useScroll();
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   useEffect(() => {
-    const loadFont = async () => {
-      const font = new FontFace('Dancing Script', `url(${DancingScript})`)
-      await font.load();
-      document.fonts.add(font);
-      setFontLoaded(true);
-    }
-    loadFont();
+    fetchAvailableSessions();
+    fetchUpcomingEvent();
   }, []);
 
-  useEffect(() => {
-    const getFeaturedProducts = async () => {
-      const products = await fetchFeaturedProducts();
-      setFeaturedProducts(products);
-    };
-
-    const getUpcomingEvent = async () => {
-      const event = await fetchUpcomingEvent();
-      setUpcomingEvent(event);
-    };
-
-    getFeaturedProducts();
-    getUpcomingEvent();
-  }, []);
-
-  const fetchFeaturedProducts = async () => {
+  const fetchAvailableSessions = async () => {
     try {
-      const response = await registerApi.get('/register-store/get-featured-products');
-      return response.data;
+      const response = await registerApi.get('/sessions/available');
+      setAvailableSessions(response.data);
     } catch (error) {
-      console.error('Error fetching featured products:', error);
-      return [];
+      console.error('Error fetching available sessions:', error);
     }
   };
 
   const fetchUpcomingEvent = async () => {
     try {
-      const response = await registerApi.get('/event/upcoming');
-      return response.data;
+      const response = await registerApi.get('/events/upcoming');
+      setUpcomingEvent(response.data);
     } catch (error) {
       console.error('Error fetching upcoming event:', error);
-      return null;
     }
-  };
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
-  };
-
-  // Define collage items with custom positions, z-index, and parallax factors.
-  const collageItems = [
-    { src: img1, top: '10%', left: '5%', zIndex: 3, parallaxFactor: 0.5 },
-    { src: img2, top: '20%', left: '40%', zIndex: 2, parallaxFactor: 1.3 },
-    { src: img3, top: '50%', left: '10%', zIndex: 1, parallaxFactor: 1.6 },
-    { src: img4, top: '60%', left: '60%', zIndex: 3, parallaxFactor: 1.9 },
-    { src: img5, top: '30%', left: '80%', zIndex: 2, parallaxFactor: 2.2 },
-    { src: img6, top: '70%', left: '30%', zIndex: 1, parallaxFactor: 2.5 },
-  ];
-  const titleStyle = {
-    fontFamily: fontLoaded ? 'Dancing Script' : 'Arial, sans-serif', // ✅ Fallback to Arial until font loads
-    fontSize: '3rem',
-    color: 'white',
-    textAlign: 'center',
-    margin: '1rem 0',
   };
 
   return (
     <div className="home-container">
-      
-      {/* Hero Section */}
-      <motion.section 
-        className="hero-section"
-        initial="hidden"
-        animate="visible"
-        variants={fadeIn}
-      >
-        <div className="hero-content">
-          <motion.h1 
-            className="hero-title"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1 }}
-            style={titleStyle}
-          >
-            BakersBurns
-          </motion.h1>
-          <p className="hero-description">Unique Wood Burning Art by Kalea Baker</p>
-          <Link to="/store" className="hero-btn">Shop Now</Link>
-        </div>
-      </motion.section>
-
-      {/* Collage Overlay */}
-      <CollageOverlay items={collageItems} />
-
-      {/* Upcoming Event Section */}
-      {upcomingEvent && (
-        <motion.section 
-          className="upcoming-event-section"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={fadeIn}
+      {/* Hero Image + Overlay */}
+      <div className="top-image-container">
+        <img src={heroImage} className="inspired-image" alt="Inspired Life" />
+        <motion.div
+          className="hero-overlay-content"
+          style={{ opacity: heroOpacity }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         >
-          <motion.h2 className="upcoming-event-title" style={titleStyle}>Upcoming Event</motion.h2>
-          <h3 className="upcoming-event-name">{upcomingEvent.name}</h3>
-          <p className="upcoming-event-date">
-            {moment(upcomingEvent.date).format('MMMM Do, YYYY')}
-            {upcomingEvent.startTime && ` at ${moment(upcomingEvent.startTime, 'HH:mm').format('h:mm A')}`}
+          <h1 className="hero-overlay-title">Living life inspired…</h1>
+          <p className="hero-overlay-text">
+            We believe the power to live a fulfilling and healthy life is within you.
+            Our mission is to enhance the quality of life of individuals and communities.
           </p>
-          <p className="upcoming-event-description">{upcomingEvent.description}</p>
-          <Link to="/event" className="upcoming-event-btn">See All Events</Link>
+          <Link to="/booking" className="hero-btn">Book a Session</Link>
+        </motion.div>
+      </div>
+
+      {/* Main Content */}
+      <div className="main-content">
+        {/* Sessions Section */}
+        <motion.section
+          className="sessions-types-section"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="section-title">Explore Our Sessions</h2>
+          <div className="session-types-container">
+            <div className="session-type">
+              <img
+                src={oneOnOneImage}
+                alt="One-on-One Sessions"
+                className="session-type-image"
+              />
+              <h3>One-on-One Sessions</h3>
+              <p>
+                Personalized yoga sessions tailored exclusively for you, 
+                offering individual guidance and focused attention to enhance your practice.
+              </p>
+              <p>
+                Located in Grand Junction, CO? We also offer in-person sessions!
+              </p>
+            </div>
+
+            <div className="session-type">
+              <img
+                src={couplesImage}
+                alt="Couples Sessions"
+                className="session-type-image"
+              />
+              <h3>Couples Sessions</h3>
+              <p>
+                Shared yoga experiences designed for two, perfect for partners or friends 
+                aiming to deepen connection through mindful movement.
+              </p>
+            </div>
+
+            <div className="session-type">
+              <img
+                src={groupImage}
+                alt="Group & Team Sessions"
+                className="session-type-image"
+              />
+              <h3>Group & Team Sessions</h3>
+              <p>
+                Engaging group yoga classes perfect for teams, events, and communities looking 
+                to grow stronger together physically and mentally.
+              </p>
+            </div>
+          </div>
+          <p>No matter your experience, every lesson is designed for your unique needs.</p>
+          <Link to="/booking" className="session-btn">
+            Explore Sessions
+          </Link>
         </motion.section>
-      )}
 
-      {/* Get In Touch Section */}
-      <motion.section 
-        className="home-section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={fadeIn}
-      >
-        <h2 className="home-title" style={titleStyle}>Get In Touch</h2>
-        <p className="contact-description">
-          For commissions, inquiries, or collaborations, feel free to contact me. Let's create something beautiful together!
-        </p>
-        <SocialLinks />
-      </motion.section>
-
-      {/* About Section */}
-      <motion.section 
-        className="home-section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={fadeIn}
-      >
-        <div className="about-content">
-          <motion.h1 
-            className="home-title"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1 }}
-            style={titleStyle}
-          >
-            About the Artist
-          </motion.h1>
+        {/* Example Additional Section */}
+        <motion.section className="grounding-section">
+          <h1>Embrace Groundedness, Cultivate Healing</h1>
           <p>
-          Kalea is a passionate artist specializing in **burn designs on wood, felt, suede, leather, and hats**. Each piece is crafted with precision, bringing intricate and meaningful designs to life. Whether it's custom artwork for personal collections or unique branding for businesses, Kalea's work embodies craftsmanship and creativity
+            Just as the earth nurtures life from humble soil, grounding ourselves reconnects 
+            us to our true nature and inner strength. At Inspired Life, we believe in the 
+            transformative power of grounding practices to foster deep healing, invigorate 
+            energy, and restore balance.
           </p>
-          <Link to="/about" className="about-btn">Learn More</Link>
-        </div>
-      </motion.section>
+          <h3>Grounded. Energized. Healed.</h3>
+        </motion.section>
+
+        {/* Contact Section */}
+        <motion.section
+          className="contact-section"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="section-title">Stay Connected</h2>
+          <p className="contact-description">
+            Join our community and get updates on upcoming sessions.
+          </p>
+          <SocialLinks />
+        </motion.section>
+      </div>
     </div>
   );
 };

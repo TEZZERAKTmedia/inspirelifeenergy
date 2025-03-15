@@ -44,6 +44,7 @@
   height: 35px;
   cursor: pointer;
   z-index: 1100;
+  margin-right: 30px;
 }
 .hamburger-menu .bar1,
 .hamburger-menu .bar2,

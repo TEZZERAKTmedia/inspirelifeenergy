@@ -365,3 +365,30 @@ input:focus {
     padding: 10px;
 
 }
+
+
+/* Universal Modal Centering Class */
+.general-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  /* Modal Inner Content Styling */
+  .modal-inner-content {
+    background-color: var(--modal-bg, #fff); /* fallback white */
+    padding: var(--modal-padding, 20px);
+    border-radius: var(--modal-radius, 10px);
+    max-width: var(--modal-max-width, 90%);
+    max-height: var(--modal-max-height, 90%);
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+  

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { registerApi } from '../../config/axios';
+import './sign_up_form.css';
 
 const VerifyEmail = () => {
   const [verificationStatus, setVerificationStatus] = useState(null);
@@ -80,8 +81,9 @@ const VerifyEmail = () => {
   };
 
   return (
-    <div className="verify-email-container">
-      <h1>Email Verification</h1>
+    <div className="general-modal-overlay">
+      <div className="modal-inner-content">
+      <h2>Email Verification</h2>
       {verificationStatus === 'success' && (
         <div className="success-message">
           {message}. Completing the process...
@@ -110,6 +112,7 @@ const VerifyEmail = () => {
       {resendMessage && (
         <div className="resend-message">{resendMessage}</div>
       )}
+      </div>
     </div>
   );
 };

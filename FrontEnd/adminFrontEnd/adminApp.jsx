@@ -9,6 +9,7 @@ import Email from './Pages/Email';
 import Layout from './Pages/Layout';
 import Orders from './Pages/Order/Orders';
 import Events from './Pages/newEvents';
+import Classes from './Pages/Classes';
 import Discount from './Pages/Discounts/Discounts';
 import SocialLinksManager from './Pages/Social/socialManager';
 import ProductManagement from './Pages/productManager/Products';
@@ -77,7 +78,7 @@ const AdminApp = () => {
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<GalleryManagement />} />
           <Route path="/layout" element={<Layout />} />
-          
+          <Route path="/classes" element={<Classes />} />
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/email" element={<Email />} />
           <Route path="/orders" element={<Orders />} />

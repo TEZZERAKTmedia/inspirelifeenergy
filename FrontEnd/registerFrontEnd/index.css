@@ -19,8 +19,8 @@
 
    /* HOME */
    --bg-color: #e7cfb4;
-   --bg-overlay: #ffffff8b;
-   --bg-section: #ffebdea0;
+   --bg-overlay: #e7cfb47d;
+   --bg-section: #ffebdeec;
    --text-color: #000000;
    --hero-bg-overlay: #874130;
    --hero-title-color: black;
@@ -103,7 +103,7 @@
    --inverted-button-text: rgb(255, 255, 255);
 
    /* HOME */
-   --bg-overlay: #79804da8;
+   --bg-overlay: #79804ded;
    --text-color: #ffffff;
    --bg-section: #72601b;
    --hero-bg-overlay: #818c3cf0;

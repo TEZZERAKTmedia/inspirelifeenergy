@@ -1,53 +1,12 @@
-@font-face {
-  font-family: 'Dancing Script';
-  src: url('./assets/CarnivaleeFreakshow-DLrm.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+html, body {
+  width: 100%;
+  min-height: 100%;
+  scroll-behavior: smooth;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-body {
-  font-family: 'Montserrat', sans-serif;
-  /* If you want a solid color fallback plus the image: */
-  background-image: url('./assets/tree.webp'); 
-  background-size: cover; /* Ensures the image covers the entire viewport */
-  color: var(--text-color);
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;
-  font-family: var(--font);
-}
-
-
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.success-message {
-  color: green;
-  font-weight: bold;
-}
-
-.error-message {
-  color: red;
-  font-weight: bold;
-}
-

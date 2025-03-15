@@ -1,33 +1,31 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const xss = require('xss');
-const Message = require('./messages'); // Import Message model
 
-// Define the User model
 const User = sequelize.define('User', {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true, // Ensure username is unique
+    unique: true,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   phoneNumber: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
   verificationToken: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
   isVerified: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   role: {
     type: DataTypes.STRING,
@@ -43,17 +41,41 @@ const User = sequelize.define('User', {
   },
   hasAcceptedPrivacyPolicy: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false, // Default to false until explicitly accepted
+    defaultValue: false,
   },
   privacyPolicyAcceptedAt: {
-      type: DataTypes.DATE, // Stores the timestamp of when privacy policy was accepted
+    type: DataTypes.DATE,
   },
   hasAcceptedTermsOfService: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false, // Default to false until explicitly accepted
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   termsAcceptedAt: {
-      type: DataTypes.DATE, // Stores the timestamp of when terms were accepted
+    type: DataTypes.DATE,
+  },
+
+  // Clearly indicate paying customers
+  isPayingCustomer: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+
+  // Testimonial text
+  testimonial: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+
+  // Testimonial submission date
+  testimonialSubmittedAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+
+  // Testimonial moderation/approval
+  testimonialApproved: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
 }, {
   hooks: {
@@ -63,6 +85,7 @@ const User = sequelize.define('User', {
       user.password = xss(user.password);
       user.phoneNumber = user.phoneNumber ? xss(user.phoneNumber) : null;
       user.verificationToken = user.verificationToken ? xss(user.verificationToken) : null;
+      user.testimonial = user.testimonial ? xss(user.testimonial) : null;
     }
   }
 });
@@ -76,7 +99,7 @@ User.associate = (models) => {
   User.hasMany(models.Message, {
     foreignKey: 'senderUsername',
     sourceKey: 'username',
-    as: 'sentMessages' // Alias for messages sent by the user
+    as: 'sentMessages'
   });
 };
 

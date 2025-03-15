@@ -40,6 +40,21 @@ const Home = () => {
               </div>
             </Link>
           </li>
+          <li className="home-tile">
+            <Link  style={{textDecoration: 'none'}} to="/classes">
+              <div className='tile-content'>
+                <h3>Classes</h3>
+                <img 
+                style={{width: '100%', height: 'auto'}}
+                src={OrdersGif}/>
+                <p>Create classes</p>
+                
+               
+                
+
+              </div>
+            </Link>
+          </li>
 
           <li className="home-tile">
             <Link style={{textDecoration: 'none'}} to="/product-manager">
@@ -111,6 +126,7 @@ const Home = () => {
               </div>
             </Link>
           </li>
+
 
         </ul>
       </div>
