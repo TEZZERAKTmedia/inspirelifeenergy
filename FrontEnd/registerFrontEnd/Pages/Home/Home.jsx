@@ -7,7 +7,8 @@ import './Home.css';
 
 /* Import images */
 import heroImage from '../../assets/inspired-life.webp';
-import oneOnOneImage from '../../assets/one-on-one.webp';
+import dirtImage from '../../assets/dirt.webp'
+;import oneOnOneImage from '../../assets/one-on-one.webp';
 import couplesImage from '../../assets/couples.webp';
 import groupImage from '../../assets/group.webp';
 
@@ -62,7 +63,10 @@ const Home = () => {
             We believe the power to live a fulfilling and healthy life is within you.
             Our mission is to enhance the quality of life of individuals and communities.
           </p>
-          <Link to="/booking" className="hero-btn">Book a Session</Link>
+          <div className='button-border'>
+          <Link to="/sessions" className="hero-btn">Book a Session</Link>
+          </div>
+          
         </motion.div>
       </div>
 
@@ -88,9 +92,9 @@ const Home = () => {
                 Personalized yoga sessions tailored exclusively for you, 
                 offering individual guidance and focused attention to enhance your practice.
               </p>
-              <p>
-                Located in Grand Junction, CO? We also offer in-person sessions!
-              </p>
+              <div className='button-border'>
+              <Link to="/sessions/oneonone" className="session-btn">Learn More</Link>
+              </div>
             </div>
 
             <div className="session-type">
@@ -104,6 +108,10 @@ const Home = () => {
                 Shared yoga experiences designed for two, perfect for partners or friends 
                 aiming to deepen connection through mindful movement.
               </p>
+              <div className='button-border'>
+              <Link to="/sessions/couples" className="session-btn">Learn More</Link>
+              </div>
+              
             </div>
 
             <div className="session-type">
@@ -117,17 +125,28 @@ const Home = () => {
                 Engaging group yoga classes perfect for teams, events, and communities looking 
                 to grow stronger together physically and mentally.
               </p>
+              <div className='button-border'>
+              <Link to="/sessions/group" className="session-btn">Learn More</Link>
+              </div>
+              
             </div>
           </div>
           <p>No matter your experience, every lesson is designed for your unique needs.</p>
+          <div className="button-border">
           <Link to="/booking" className="session-btn">
             Explore Sessions
           </Link>
+          </div>
         </motion.section>
 
         {/* Example Additional Section */}
-        <motion.section className="grounding-section">
-          <h1>Embrace Groundedness, Cultivate Healing</h1>
+        <motion.section className="sessions-types-section">
+          <h2>Embrace Groundedness, Cultivate Healing</h2>
+          <img
+                src={dirtImage}
+                alt="human-holding-dirt"
+                className="session-type-image-dirt"
+              />
           <p>
             Just as the earth nurtures life from humble soil, grounding ourselves reconnects 
             us to our true nature and inner strength. At Inspired Life, we believe in the 

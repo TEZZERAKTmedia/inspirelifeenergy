@@ -21,6 +21,10 @@ const Navbar = () => {
     '/gallery': 'Gallery',
     '/privacy-policy': 'Privacy Policy',
     '/terms-of-service': 'Terms of Service',
+    '/sessions' : 'Sessions',
+    'sessions/ononone' : 'One-on-One',
+    'sessions/couples' : 'Couples',
+    'sessions/groups' : 'Groups/Teams',
   };
 
   const currentPageTitle = pageTitles[location.pathname] || '';
@@ -75,6 +79,9 @@ const Navbar = () => {
             <ul className="nav-list desktop">
               <li className="nav-item" onClick={closeMenu}>
                 <Link to="/">Home</Link>
+              </li>
+              <li className="nav-item" onClick={closeMenu}>
+                <Link to="/sessions">Sessions</Link>
               </li>
               <li className="nav-item" onClick={closeMenu}>
                 <Link to="/store">Store</Link>
@@ -151,17 +158,22 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="nav-item" onClick={closeMenu}>
+                <Link to="/sessions">Sessions</Link>
+              </li>
+            {/*<li className="nav-item" onClick={closeMenu}>
               <Link to="/store">Store</Link>
             </li>
             <li className="nav-item" onClick={closeMenu}>
               <Link to="/cart">Cart</Link>
             </li>
+            
             <li className="nav-item" onClick={closeMenu}>
               <Link to="/about">About</Link>
             </li>
             <li className="nav-item" onClick={closeMenu}>
               <Link to="/gallery">Gallery</Link>
             </li>
+            */}
             <div className="nav-item-tiny" onClick={closeMenu}>
               <Link to="/privacy-policy">Privacy Policy</Link>
             </div>

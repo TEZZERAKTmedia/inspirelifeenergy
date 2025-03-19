@@ -3,6 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/navbar/navbar';
 import Home from './Pages/Home/Home'; // Load Home directly (no lazy) for faster rendering
 import BackgroundVideo from './assets/background.webm'; // ✅ Import WebM video
+import  OneOnOne  from './Pages/Sessions/One-on-one';
+import  Couples  from './Pages/Sessions/Couples';
+import  Group  from './Pages/Sessions/Group';
+import Sessions from './Pages/Sessions/Sessions';
+import BookingForm from './Pages/Sessions/Booking/BookingForm';
 
 // Lazy-load other pages
 const Store = React.lazy(() => import('./Pages/Store/Store'));
@@ -23,6 +28,7 @@ const CancelPage = React.lazy(() => import('./Pages/Cart/cancelCheckout'));
 const SuccessPage = React.lazy(() => import('./Pages/Cart/successCheckout'));
 const PasswordSetupForm = React.lazy(() => import('./Pages/Signup/password'));
 const AcceptPrivacyTerms = React.lazy(() => import('./Pages/Cart/privacy&terms'));
+
 
 function App() {
   const appContainerStyle = {
@@ -85,6 +91,11 @@ function App() {
               <Route path="/success" element={<SuccessPage />} />
               <Route path="/password-form" element={<PasswordSetupForm />} />
               <Route path="/accept-privacy-terms" element={<AcceptPrivacyTerms />} />
+              <Route path="/sessions" element={<Sessions />} />
+              <Route path="/booking" element={<BookingForm />} />
+              <Route path="/sessions/oneonone" element={<OneOnOne/>} />
+              <Route path="/sessions/couples" element={<Couples/>} />
+              <Route path="/sessions/group" element={<Group/>} />
             </Routes>
           </Suspense>
         </div>

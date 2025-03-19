@@ -1,0 +1,259 @@
+/* Container that holds the entire booking form */
+.modal-one {
+    width: 100%;
+    max-width: 500px; /* Limits form width on large screens */
+    margin: 40px auto; /* Centers horizontally */
+    background-color: var(--bg-section);
+    box-shadow: 0 4px 10px var(--product-shadow);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Form Title */
+  .modal-one h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+  
+  /* Basic form styling */
+  .modal-one form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Labels */
+  .modal-one label {
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  
+  /* Inputs */
+  .modal-one input[type="email"],
+  .modal-one input[type="text"],
+  .modal-one input[type="tel"],
+  .modal-one select {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+  
+  /* Button (submit, etc.) */
+  .modal-one button[type="submit"] {
+    align-self: center;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    background-color: var(--btn-bg);
+    color: var(--inverted-button-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .modal-one button[type="submit"]:hover {
+    background-color: var(--btn-hover);
+    color: var(--btn-hover-text);
+  }
+  
+  /* When showing the verification step */
+  .modal-one > p, .modal-one > button {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  /* For the verification step or other messages */
+  .modal-one .verification-message {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text-color);
+  }
+  
+  /* Make the container responsive */
+  @media (max-width: 600px) {
+    .modal-one {
+      margin: 20px auto;
+      padding: 15px;
+    }
+  
+    .modal-one h2 {
+      font-size: 1.5rem;
+    }
+  
+    .modal-one input,
+    .modal-one select {
+      font-size: 0.9rem;
+      padding: 0.6rem;
+    }
+  
+    .modal-one button[type="submit"] {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.5rem;
+    }
+  }
+
+  /* Main container for the booking form */
+.booking-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Basic form styling */
+  .booking-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+  
+  .booking-form-container label {
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 3px;
+  }
+  
+  .booking-form-container input,
+  .booking-form-container select {
+    padding: 0.7rem;
+    font-size: 1rem;
+  }
+  
+  .submit-booking-btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background: #4a6fa5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-booking-btn:hover:enabled {
+    background-color: #3d5883;
+  }
+  
+  .submit-booking-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Toggle Rows */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .toggle-row span {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  
+  /* Toggle Container */
+  .toggle-container {
+    width: 50px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .toggle-container.checked {
+    background: green;
+  }
+  
+  /* The toggle handle (the circular knob) */
+  .toggle-handle {
+    width: 21px;
+    height: 21px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+  }
+  
+  .toggle-container.checked .toggle-handle {
+    transform: translateX(25px);
+  }
+  
+  /* Modal styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background: #fff;
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* The text container inside the modal that can scroll */
+  .modal-content .scrollable-privacy-content,
+  .modal-content .scrollable-terms-content {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Buttons inside the modal */
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100%;
+  }
+  
+  .modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:first-of-type {
+    background: #4a6fa5;
+    color: #fff;
+    transition: background 0.3s;
+  }
+  
+  .modal-buttons button:first-of-type:hover {
+    background: #3d5883;
+  }
+  
+  .modal-buttons button:last-of-type {
+    background: #ccc;
+    color: #000;
+  }
+  
+  

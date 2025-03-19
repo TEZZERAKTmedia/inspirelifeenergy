@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 // Import images
+{/* 
 import img1 from "../../assets/img1.webp";
 import img2 from "../../assets/img2.webp";
 import img3 from "../../assets/img3.webp";
@@ -13,6 +14,8 @@ import img8 from "../../assets/img8.webp";
 import img9 from "../../assets/img9.webp";
 import img10 from "../../assets/img10.webp";
 import img11 from "../../assets/img11.webp";
+
+*/}
 
 // Generates a random value within a range
 const getRandom = (min, max) => Math.random() * (max - min) + min;

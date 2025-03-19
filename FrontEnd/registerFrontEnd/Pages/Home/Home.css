@@ -70,18 +70,7 @@
   }
   
   /* Hero button */
-  .hero-btn {
-    background-color: var(--btn-bg);
-    color: var(--inverted-button-text);
-    padding: 15px 40px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
-  }
-  .hero-btn:hover {
-    background-color: var(--btn-hover);
-  }
+
   
   /* =======================
      Main Content
@@ -151,21 +140,63 @@
     margin-bottom: 15px;
   }
   
-  /* Additional text & button styling for sessions */
-  .session-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 15px 40px;
-    background-color: var(--btn-bg);
-    color: var(--inverted-button-text);
-    text-decoration: none;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+
+button, .session-btn, .hero-btn {
+  display: inline-block;    /* inline-block so width matches content */
+  position: relative;
+  
+  /* Remove margins/padding that forced large expansions */
+  margin: 0;
+  padding: 12px 36px;
+
+  /* No direct border on the button itself */
+  border: none;     
+
+  /* Keep your background color and text color */
+  background-color: var(--btn-bg);
+  color: var(--inverted-button-text);
+
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover effect for the button's background & text */
+button:hover, .session-btn:hover, .hero-btn:hover {
+  background-color: var(--btn-hover); 
+  color: var(--btn-hover-text);
+}
+
+
+.button-border {
+  display: inline-block;    /* Key to keep wrapper sized to content */
+  margin: 10px;            /* Add spacing around the wrapper */
+  padding: 5px;            /* Gap between wrapper border and button */
+  border: 2px solid var(--btn-bg);
+  border-radius: 6px;      /* Slightly larger radius than the button */
+  /* Optional shadow if you want an extra effect:
+     box-shadow: 0 0 0 3px var(--bg-section);
+  */
+  transition: border-color 0.3s ease-in-out;
+}
+
+.button-border:hover {
+  /* Optionally swap border color on hover */
+  border-color: var(--btn-hover);
+}
+
+
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  button, .session-btn, .hero-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
   }
-  .session-btn:hover {
-    background-color: var(--btn-hover);
-  }
+}
+
   
   /* =======================
      Contact Section
@@ -193,15 +224,7 @@
       padding: 20px;
      
     }
-    .hero-btn {
-      background-color: var(--btn-bg);
-      color: var(--inverted-button-text);
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
+    
     
     .hero-overlay-title {
       font-size: 2rem;
@@ -212,5 +235,17 @@
     .session-type {
       width: 100%;  /* Full width on mobile */
     }
+  }
+  
+
+  h2 {
+    margin: 10%;
+  }
+  .session-type-image-dirt {
+    width: 100%;         /* or set a fixed width if needed */
+    height: 300px;       /* or whatever fixed height you prefer */
+    object-fit: cover;   /* ensures the image covers the container */
+    object-position: 80% center; /* shifts the image to the right */
+    display: block;      /* remove default inline spacing if necessary */
   }
   
