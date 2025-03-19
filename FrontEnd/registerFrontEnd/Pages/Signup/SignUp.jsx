@@ -36,6 +36,7 @@ const Signup = () => {
         <GoogleSignInButton
           onSuccess={handleGoogleSuccess}
           onFailure={handleGoogleFailure}
+          
         />
         <SignUpForm />
       </div>
