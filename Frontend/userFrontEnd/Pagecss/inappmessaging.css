@@ -1,0 +1,129 @@
+/* Main messaging container */
+.in-app-messaging-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;  /* Full screen height */
+  background-color: #1c1c1c;  /* Dark background */
+  color: #fff;  /* White text */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Messaging layout - container for all messages */
+.messaging-layout {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;  /* Scrollable area */
+  padding-bottom: 20px;
+}
+
+/* Common message bubble styles */
+.message-item {
+  max-width: 60%;  /* Adjust the width of the message bubbles */
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+/* Message timestamp */
+.message-timestamp {
+  font-size: 12px;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+/* Sent messages (aligned to the right) */
+
+/* Input box at the bottom for typing new messages */
+.message-input-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+}
+
+.message-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+}
+
+.message-send-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.message-send-button:hover {
+  background-color: #0056b3;  /* Darker blue on hover */
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  display: inline-flex;  /* Make message box only as wide as needed */
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #000;
+  max-width: 80%;  /* Limit message width to avoid overly wide messages */
+}
+
+/* Admin message styling (aligned to the left) */
+.message.admin {
+  background-color: #fff;
+  color: #333;
+  align-self: flex-start;
+  border: 1px solid #ccc;
+  text-align: left;
+  width: auto;
+}
+
+/* User message styling (aligned to the right) */
+.message.user {
+  background-color: orange;
+  color: #fff;
+  align-self: flex-end;
+  text-align: right;
+  width: auto;
+}
+
+/* Input styling */
+.messaging-interface input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.messaging-interface button {
+  padding: 10px 20px;
+  border: none;
+  background-color: orange;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.messaging-interface button:hover {
+  background-color: #e07b1b;
+}
+
+

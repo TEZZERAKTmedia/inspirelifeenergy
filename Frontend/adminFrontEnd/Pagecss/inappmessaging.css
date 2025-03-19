@@ -1,0 +1,167 @@
+/* inappmessaging.css */
+
+/* Common container for the messaging app */
+.messagingApp-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar styles (Desktop) */
+.messagingApp-sidebar {
+  width: 300px;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+.messagingApp-sidebar-header {
+  font-size: 2rem;
+  font-family: 'Dancing Script', cursive;
+  margin-top: 30%;
+}
+
+/* Search container in sidebar */
+.messagingApp-searchContainer {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.messagingApp-searchInput {
+  flex: 1;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.messagingApp-searchButton {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+/* Thread list styles */
+.messagingApp-threadList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.messagingApp-threadItem {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  color: #007bff;
+}
+.messagingApp-threadUsername {
+  color: black;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+}
+.messagingApp-threadPreview {
+  font-size: 14px;
+  color: #555;
+}
+.messagingApp-threadTimestamp {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Main message window styles (Desktop) */
+.messagingApp-main {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.messagingApp-messageList {
+  list-style: none;
+  padding: 0;
+  flex: 1;
+  overflow-y: scroll;
+}
+.messagingApp-messageItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  max-width: 70%;
+}
+.messagingApp-messageItem--admin {
+  align-items: flex-end;
+}
+.messagingApp-messageItem--user {
+  align-items: flex-start;
+}
+.messagingApp-messageBubble {
+  padding: 10px;
+  border-radius: 15px;
+  word-wrap: break-word;
+}
+.messagingApp-messageBubble--admin {
+  background-color: white;
+  color: black;
+  text-align: right;
+  border: 1px solid #ccc;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.messagingApp-messageBubble--user {
+  background-color: orange;
+  color: white;
+  text-align: left;
+}
+.messagingApp-messageTimestamp {
+  font-size: 10px;
+  color: #999;
+  margin-top: 5px;
+}
+.messagingApp-messageForm {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.messagingApp-messageInput {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  flex: 1;
+}
+.messagingApp-sendButton {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  margin-left: 10px;
+}
+
+/* Mobile-specific styles */
+.messagingApp-mobileSidebar {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.messagingApp-mobileMain {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+.messagingApp-mobileBackButton {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+.messagingApp-mobileNoThread {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+}

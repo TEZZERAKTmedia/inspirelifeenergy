@@ -1,0 +1,126 @@
+/* Navbar Container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  
+  /* Use our theme variables: */
+  background-color: var(--navbar-bg);
+  box-shadow: var(--navbar-shadow);
+  
+  z-index: 9999;
+
+  /* If you only want 'Dancing Script' in certain themes, keep it. 
+     Otherwise, consider using var(--font) if you want a universal font from your theme. */
+  font-family: 'Dancing Script';
+}
+
+/* Top Section of the Navbar */
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Navbar Title */
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--navbar-text);
+  z-index: 9999;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 40px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger-menu .bar1,
+.hamburger-menu .bar2,
+.hamburger-menu .bar3 {
+  width: 100%;
+  height: 5px;
+  background-color: var(--hamburger-bar);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.hamburger-menu.open .bar1 {
+  transform: rotate(45deg) translate(6px, 11px);
+}
+
+.hamburger-menu.open .bar2 {
+  opacity: 0;
+}
+
+.hamburger-menu.open .bar3 {
+  transform: rotate(-45deg) translate(5px, -10px);
+}
+
+/* Navigation Grid */
+.nav-grid {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+  justify-content: center;
+  align-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  width: 100%;
+  
+  position: fixed;
+  top: 60; /* Space below the navbar-top */
+  left: 0;
+  height: 100vh; /* Full height minus navbar-top */
+  
+  /* The background for the expanded nav: */
+  background-color: var(--nav-list-bg);
+  
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+.nav-grid.show {
+  display: grid;
+}
+
+/* Grid items (Nav Item) */
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Use the new variable for item background */
+  background-color: var(--btn-bg);
+  color: var(--invrt-text-color);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-item:hover {
+  /* Use your hover var: --nav-list-item-bg-hover */
+  background-color: var(--nav-list-item-bg-hover);
+  transform: scale(1.05);
+  color: var(--invrt-text-color);
+}
+
+/* Nav Link Style */
+.nav-link {
+  text-decoration: none;
+  color: var(--invrt-text-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+
+}
