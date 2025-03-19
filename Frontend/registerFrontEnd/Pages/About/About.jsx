@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './about.css'; 
-import Headshot from '../../assets/headshot.webp';
+
 import SocialLink from '../../Components/navbar/socialLinks';
 
 const About = () => {
@@ -13,12 +13,7 @@ const About = () => {
         <div className="about-container">
             <div>
                 <h1 className="about-title" data-aos="fade-up">About the Artist</h1>
-                <img
-                    src={Headshot}
-                    alt="Artist's portrait"
-                    className="about-image"
-                    data-aos="fade-up"
-                />
+                
                 <p className="about-text">
                     Welcome to the world of burn design art by Kalea. With a passion for 
                     creating intricate and expressive pieces, Kalea Baker has been mastering 
