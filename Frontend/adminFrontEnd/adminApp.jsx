@@ -9,7 +9,7 @@ import Email from './Pages/Email';
 import Layout from './Pages/Layout';
 import Orders from './Pages/Order/Orders';
 import Events from './Pages/newEvents';
-import Classes from './Pages/Classes';
+import Classes from './Pages/Classes/Classes';
 import Discount from './Pages/Discounts/Discounts';
 import SocialLinksManager from './Pages/Social/socialManager';
 import ProductManagement from './Pages/productManager/Products';

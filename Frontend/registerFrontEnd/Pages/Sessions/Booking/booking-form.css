@@ -103,7 +103,7 @@
 .booking-form-container {
     max-width: 600px;
     margin: 40px auto;
-    background: #f1f1f1;
+    background: var(--navbar-bg);
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -208,7 +208,7 @@
   }
   
   .modal-content {
-    background: #fff;
+    background: var(--navbar-bg);
     width: 80%;
     max-width: 700px;
     padding: 20px;
@@ -231,7 +231,7 @@
   .modal-buttons {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 100%;
+    margin-bottom: 20%;
   }
   
   .modal-buttons button {

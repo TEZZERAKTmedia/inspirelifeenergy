@@ -17,6 +17,12 @@ const Class = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    available: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
+    
     end_time: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -33,6 +39,11 @@ const Class = sequelize.define(
     price: {
       type: DataTypes.DECIMAL(10, 2), // Decimal for price with two decimal places
       allowNull: false,
+    },
+    color: {
+      type: DataTypes.STRING, 
+      allowNull: false, 
+      defaultValue: "#3498db"
     },
     google_meet_link: {
       type: DataTypes.STRING, // Stores the generated Google Meet link

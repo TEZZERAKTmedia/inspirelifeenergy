@@ -55,13 +55,16 @@ const userEventRoutes = require('./routes/user/eventRoutes');
 const userGalleryRoutes = require('./routes/user/galleryRoutes');
 const registerRates = require('./routes/register/rates.js');
 const registerCartRoutes = require('./routes/register/cartRoutes');
+const registerClassRoutes = require('./routes/register/classesRoutes.js');
 const notificationRoutes = require('./routes/admin/notifcationRoutes');
 const socialRoutes = require('./routes/register/socialRoutes');
 const adminSocialRoutes = require('./routes/admin/adminSocialRoutes');
+const adminClassRoutes = require('./routes/admin/adminClassesRoutes.js')
 const adminDiscountRoutes = require('./routes/admin/adminDiscountRoutes');
 const { rateLimiter } = require('./utils/rateLimiter');
 const googleRoutes = require('./routes/register/googleRoutes');
 const invoiceRoutes = require('./routes/admin/invoiceRoutes');
+const registerCheckoutRoutes = require('./routes/register/checkoutRoutes.js')
 
  // Assuming passport.js is in the same directory
 
@@ -161,6 +164,8 @@ app.use('/login-passkey-routes', highSecurityRateLimiter('passkey'), passkeyRout
 app.use('/register-store', lowSecurityRateLimiter('register-store'), registerStoreRoutes);
 app.use('/register-cart', lowSecurityRateLimiter('register-cart'), registerCartRoutes); 
 app.use('/register-rates', lowSecurityRateLimiter('register-rates'), registerRates);
+app.use('/register-classes', lowSecurityRateLimiter('register-classes'), registerClassRoutes)
+app.use('/register-checkout', lowSecurityRateLimiter('register-classes'), registerCheckoutRoutes);
 
 
 // User routes
@@ -176,6 +181,7 @@ app.use('/user-orders', userAuthMiddleware('user'), mediumSecurityRateLimiter('u
 app.use('/user-event', userAuthMiddleware('user'), mediumSecurityRateLimiter('user-event'), userEventRoutes);
 app.use('/user-gallery', mediumSecurityRateLimiter('user-gallery'), userGalleryRoutes);
 app.use('/user-social', socialRoutes);
+
 
 
 
@@ -198,6 +204,7 @@ app.use('/admin-event', adminAuthMiddleware('admin'), mediumSecurityRateLimiter(
 app.use('/admin-notifications', adminAuthMiddleware('admin'), notificationRoutes);
 app.use('/admin-social', adminSocialRoutes);
 app.use('/discount', adminAuthMiddleware('admin'),mediumSecurityRateLimiter('discounts'), adminDiscountRoutes);
+app.use('/admin-classes', adminAuthMiddleware('admin'), lowSecurityRateLimiter('Classes'), adminClassRoutes);
 app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 app.use('/socialIcons', express.static(path.resolve(__dirname, 'socialIcons')));
 app.use('/galleryuploads', express.static(path.join(__dirname, 'galleryuploads')));

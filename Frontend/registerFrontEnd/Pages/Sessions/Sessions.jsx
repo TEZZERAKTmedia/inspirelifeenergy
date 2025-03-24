@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import oneOnOneImage from '../../assets/one-on-one.webp';
 import couplesImage from '../../assets/couples.webp';
 import groupImage from '../../assets/group.webp';
+import Classes  from './Classes';
 import './sessions-menu.css'; // Updated CSS import for clarity
 
 const Sessions = () => {
@@ -30,6 +31,7 @@ const Sessions = () => {
           Choose the perfect session to match your goals & lifestyle
         </p>
       </section>
+      <Classes />
 
       <motion.section
         className="yoga-sessions-types-section"

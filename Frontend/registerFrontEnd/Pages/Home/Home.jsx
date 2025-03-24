@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { registerApi } from '../../config/axios';
 import './Home.css';
+import ClassesList from '../Sessions/Classes';
 
 /* Import images */
 import heroImage from '../../assets/inspired-life.webp';
@@ -72,6 +73,7 @@ const Home = () => {
 
       {/* Main Content */}
       <div className="main-content">
+        <ClassesList />
         {/* Sessions Section */}
         <motion.section
           className="sessions-types-section"

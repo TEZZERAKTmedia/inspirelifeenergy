@@ -1,0 +1,59 @@
+.class-list {
+    list-style: none;
+    padding: 0;
+}
+
+.class-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+input[type="color"] {
+    appearance: none; /* Removes browser default styling */
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+input[type="color"]::-moz-color-swatch {
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
