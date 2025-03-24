@@ -108,10 +108,10 @@ app.use(
             : process.env.DEV_REGISTER_URL, // ✅ Register domain (prod/dev)
           process.env.BACKEND_URL, // ✅ Allow API itself if needed
           process.env.NODE_ENV === "production"
-            ? "https://admin.bakersburns.com"
+            ? "https://admin.inspire.tezzeraktmedia.space"
             : "http://localhost:5010", // ✅ Explicitly allow local dev frontend
           process.env.NODE_ENV === "production"
-            ? "https://api.bakersburns.com"
+            ? "https://api.inspire.tezzeraktmedia.space"
             : "http://localhost:3450", // ✅ Local backend access for development
         ].filter(Boolean), // ✅ Removes undefined values if a variable is missing
         scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // ✅ Adjust for necessary script security
@@ -284,7 +284,7 @@ sequelize.authenticate()
     checkShippedOrdersUsps();
 
     // ✅ Start the Express server
-    const PORT = process.env.PORT || 3450;
+    const PORT = process.env.PORT || 3457;
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
