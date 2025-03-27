@@ -218,6 +218,7 @@ app.use('/privacy-policy', express.static(path.join(__dirname, 'public/static/pr
 
 
 
+
 // Error handling
 app.use((err, req, res, next) => {
   console.error('Error:', err);
