@@ -1,27 +1,56 @@
+/* Use CSS Grid for the class list */
 .class-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
     list-style: none;
     padding: 0;
-}
-
-.class-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+  }
+  
+  /* On very small screens, force 2 columns */
+  @media (max-width: 600px) {
+    .class-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Parent container: the li gets the classItem's color as background */
+  .class-item {
+    background-color: var(--item-bg, #4caf50);  /* fallback */
+    border-radius: 8px;
+    padding: 10px;  /* This padding shows the background color as a border around inner content */
     cursor: pointer;
-}
-
-.delete-btn {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* The inner container shows the class details on a white background */
+  .class-details {
+    background-color: var(--bg-overlay);
+    border-radius: 6px;
+    padding: 10px;
+    height: 90%;
+  }
+  
+  /* Headings and text */
+  .h3-class-details {
+    color: var(--text-color, #333);
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Delete button styles */
+  .class-list-delete-btn {
     background: red;
     color: white;
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     cursor: pointer;
-}
-
-.modal {
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  /* Modal styles remain unchanged */
+  .modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -31,10 +60,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
+  }
+  .modal-content {
     background: white;
     padding: 20px;
     border-radius: 5px;
-}
+  }
+  

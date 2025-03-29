@@ -17,37 +17,50 @@ const Class = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    available: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true,
-    },
-    
     end_time: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    class_date: {
-      type: DataTypes.DATEONLY, // Stores only the date (YYYY-MM-DD)
+    available: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
     frequency: {
       type: DataTypes.ENUM("one-time", "weekly", "monthly"),
       allowNull: false,
       defaultValue: "one-time",
     },
+    frequency_start_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    frequency_end_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
     price: {
-      type: DataTypes.DECIMAL(10, 2), // Decimal for price with two decimal places
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     color: {
-      type: DataTypes.STRING, 
-      allowNull: false, 
-      defaultValue: "#3498db"
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "#3498db",
     },
     google_meet_link: {
-      type: DataTypes.STRING, // Stores the generated Google Meet link
+      type: DataTypes.STRING,
       allowNull: true,
+    },
+    zoom_meet_link: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    
+    subscription_required: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -65,7 +78,7 @@ const Class = sequelize.define(
         if (this.start_time && this.end_time) {
           const start = new Date(this.start_time);
           const end = new Date(this.end_time);
-          return Math.round((end - start) / 60000); // Convert milliseconds to minutes
+          return Math.round((end - start) / 60000); // minutes
         }
         return null;
       },

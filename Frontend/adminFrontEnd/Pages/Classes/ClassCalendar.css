@@ -1,39 +1,80 @@
 .calendar-container {
-    padding: 20px;
-    max-width: 900px;
-    margin: auto;
-  }
-  
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: var(--bg-overlay);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--bg-overlay);
+}
+
+.calendar-cell {
+  border: 1px solid var(--text-color, #ccc);
+  padding: 8px;
+  min-height: 70px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.calendar-header button {
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+
+.class-item {
+  background: #4caf50;
+  color: white;
+  padding: 4px 6px;
+  margin-top: 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.empty {
+  background: transparent;
+}
+
+/* Responsive scaling */
+@media (max-width: 600px) {
   .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 10px;
   }
-  
-  .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+
+  .calendar-header button {
+    font-size: 14px;
+    padding: 5px 10px;
   }
-  
+
   .calendar-cell {
-    border: 1px solid var(--text-color);
-    padding: 10px;
-    min-height: 80px;
-    position: relative;
+    padding: 2px;
+    min-height: 60px;
+    font-size: 12px;
   }
-  
+
   .class-item {
-    background: #4caf50;
-    color: white;
-    padding: 5px;
-    margin-top: 5px;
-    cursor: pointer;
+    font-size: .5rem;
+    padding: 3px 5px;
   }
-  
-  .empty {
-    background: transparent;
-  }
-  
+}

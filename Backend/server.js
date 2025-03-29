@@ -60,7 +60,8 @@ const adminDiscountRoutes = require('./routes/admin/adminDiscountRoutes');
 const { rateLimiter } = require('./utils/rateLimiter');
 const googleRoutes = require('./routes/register/googleRoutes');
 const invoiceRoutes = require('./routes/admin/invoiceRoutes');
-const registerCheckoutRoutes = require('./routes/register/checkoutRoutes.js')
+const registerCheckoutRoutes = require('./routes/register/checkoutRoutes.js');
+const stripeCheckoutRoutes = require('./routes/stripe/stripeRoutes.js'); // Assuming you have a separate route for Stripe checkout
 
  // Assuming passport.js is in the same directory
 
@@ -183,6 +184,7 @@ app.use('/user-social', socialRoutes);
 
 //STRIPE ROUTES
 app.use('/stripe', lowSecurityRateLimiter('stripe'),stripeRoutes); 
+app.use('/stripe-checkout', lowSecurityRateLimiter('stripe-checkout'), stripeCheckoutRoutes); // Assuming you have a separate route for Stripe checkout
 
 // Google Routes
 app.use('/google', googleRoutes);
