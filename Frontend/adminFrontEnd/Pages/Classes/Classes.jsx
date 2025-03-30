@@ -13,7 +13,8 @@ const ClassForm = () => {
     end_time: "",
     color: "#3498db",
     frequency: "one-time",
-    subscription_required: false,
+    // Change from boolean to string so we can store "class" or "subscription"
+    subscription_required: "class", 
     frequency_start_date: "",
     frequency_end_date: ""
   });
@@ -22,6 +23,7 @@ const ClassForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    // For radio buttons (which we'll use for subscription_required) and other inputs
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value
@@ -70,79 +72,135 @@ const ClassForm = () => {
       <h2>Create a New Class</h2>
       <form className="class-form" onSubmit={handleSubmit}>
         <div className="form-grid">
-          <input
-            type="text"
-            name="name"
-            placeholder="Class Name"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="datetime-local"
-            name="start_time"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="datetime-local"
-            name="end_time"
-            onChange={handleChange}
-            required
-          />
-
-          <label className="color-label">
-            Select Class Color:
+          <div className="form-group">
+            <label htmlFor="name">Class Name:</label>
             <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Class Name"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="price">Price:</label>
+            <input
+              id="price"
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="start_time">Start Time:</label>
+            <input
+              id="start_time"
+              type="datetime-local"
+              name="start_time"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="end_time">End Time:</label>
+            <input
+              id="end_time"
+              type="datetime-local"
+              name="end_time"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group color-group">
+            <label htmlFor="color">Select Class Color:</label>
+            <input
+              id="color"
               type="color"
               name="color"
               value={formData.color}
               onChange={handleChange}
             />
-          </label>
+          </div>
 
-          <select name="frequency" onChange={handleChange}>
-            <option value="one-time">One-time</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-          </select>
-
-          {formData.frequency !== "one-time" && (
-            <>
-              <input
-                type="date"
-                name="frequency_start_date"
-                placeholder="Start of Recurrence"
-                value={formData.frequency_start_date}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="date"
-                name="frequency_end_date"
-                placeholder="End of Recurrence"
-                value={formData.frequency_end_date}
-                onChange={handleChange}
-                required
-              />
-            </>
-          )}
-
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="subscription_required"
+          <div className="form-group frequency-group">
+            <label htmlFor="frequency">Frequency:</label>
+            <select
+              id="frequency"
+              name="frequency"
               onChange={handleChange}
-            />
-            Subscription Required
-          </label>
+              value={formData.frequency}
+            >
+              <option value="one-time">One-time</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+
+            {formData.frequency !== "one-time" && (
+              <>
+                <div className="form-group">
+                  <label htmlFor="frequency_start_date">Start of Recurrence:</label>
+                  <input
+                    id="frequency_start_date"
+                    type="date"
+                    name="frequency_start_date"
+                    placeholder="Start of Recurrence"
+                    value={formData.frequency_start_date}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="frequency_end_date">End of Recurrence:</label>
+                  <input
+                    id="frequency_end_date"
+                    type="date"
+                    name="frequency_end_date"
+                    placeholder="End of Recurrence"
+                    value={formData.frequency_end_date}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="form-group subscription-group">
+            <label>Delivery Type:</label>
+            <div className="toggle-group">
+              <input
+                type="radio"
+                id="option-class"
+                name="subscription_required"
+                value="class"
+                checked={formData.subscription_required === "class"}
+                onChange={handleChange}
+              />
+              <label htmlFor="option-class" className="toggle-option">
+                Class
+              </label>
+
+              <input
+                type="radio"
+                id="option-subscription"
+                name="subscription_required"
+                value="subscription"
+                checked={formData.subscription_required === "subscription"}
+                onChange={handleChange}
+              />
+              <label htmlFor="option-subscription" className="toggle-option">
+                Subscription
+              </label>
+            </div>
+          </div>
         </div>
 
         <motion.button 
@@ -154,8 +212,12 @@ const ClassForm = () => {
           Create Class
         </motion.button>
       </form>
-
+      <div >
+        <h2>Calendar</h2>
       <ClassCalendar refreshCalendar={refreshCalendar} />
+      </div>
+
+      
       <ClassesList refreshCalendar={refreshCalendar} />
     </motion.div>
   );

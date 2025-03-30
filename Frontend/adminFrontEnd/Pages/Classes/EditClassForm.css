@@ -1,9 +1,11 @@
-.class-list {
+/* Unique prefix: edit-class- */
+
+.edit-class-class-list {
     list-style: none;
     padding: 0;
-}
-
-.class-item {
+  }
+  
+  .edit-class-class-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,34 +13,94 @@
     border: 1px solid #ddd;
     margin-bottom: 10px;
     cursor: pointer;
-}
-
-.delete-btn {
+  }
+  
+  .edit-class-delete-btn {
     background: red;
     color: white;
     border: none;
     padding: 5px;
     cursor: pointer;
-}
-
-.modal {
+  }
+  
+  .edit-class-btn {
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  /* Modal container */
+  .edit-class-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: var(--bg-overlay, rgba(0, 0, 0, 0.5));
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
-    background: white;
+    z-index: 1000;
+  }
+  
+  /* Center all modal content using flex */
+  .edit-class-modal-content {
+    background-color: var(--navbar-bg);
     padding: 20px;
     border-radius: 5px;
-}
-input[type="color"] {
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 90vh;      /* Maximum height relative to viewport */
+    overflow-y: auto;      /* Enable vertical scrolling when needed */
+  }
+  
+  /* Center the form inside the modal */
+  .edit-class-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center; /* Centers inline elements inside the form */
+  }
+  
+  /* Form group styling - center children */
+  .edit-class-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+    width: 100%;
+    align-items: center;  /* Center child elements horizontally */
+    text-align: center;
+  }
+  
+  .edit-class-form-group label {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  /* Input styling - use a fixed width and center with auto margins */
+  .edit-class-form-group input[type="text"],
+  .edit-class-form-group input[type="number"],
+  .edit-class-form-group input[type="datetime-local"],
+  .edit-class-form-group input[type="date"],
+  .edit-class-form-group select {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  /* Color input styling within the edit-class context */
+  .edit-class-form-group.color-group input[type="color"] {
     appearance: none; /* Removes browser default styling */
     border: none;
     width: 40px;
@@ -46,14 +108,68 @@ input[type="color"] {
     padding: 5px;
     cursor: pointer;
     background-color: transparent;
-}
-
-input[type="color"]::-webkit-color-swatch {
+  }
+  
+  .edit-class-form-group.color-group input[type="color"]::-webkit-color-swatch {
     border-radius: 5px;
     border: 2px solid #ccc;
-}
-
-input[type="color"]::-moz-color-swatch {
+  }
+  
+  .edit-class-form-group.color-group input[type="color"]::-moz-color-swatch {
     border-radius: 5px;
     border: 2px solid #ccc;
-}
+  }
+  
+  /* Toggle Button Styles for Subscription Options */
+  .edit-class-toggle-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  
+  .edit-class-toggle-group input[type="radio"] {
+    display: none;
+  }
+  
+  .edit-class-toggle-group .edit-class-toggle-option {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .edit-class-toggle-group .edit-class-toggle-option:hover {
+    background-color: #eee;
+  }
+  
+  .edit-class-toggle-group input[type="radio"]:checked + .edit-class-toggle-option {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #3498db;
+  }
+  
+  /* Button styling */
+  .edit-class-modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .edit-class-confirm-delete {
+    background-color: red;
+    color: white;
+    margin-right: 8px;
+  }
+  
+  .edit-class-cancel-delete {
+    background-color: var(--btn-bg);
+    color: black;
+  }
+  .edit-class-btn {
+    background-color: var(--bg-overlay);
+  }
+  

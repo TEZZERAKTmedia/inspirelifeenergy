@@ -56,13 +56,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--bg-overlay); 
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .modal-content {
-    background: white;
+    background: var(--bg-overlay); 
     padding: 20px;
     border-radius: 5px;
   }

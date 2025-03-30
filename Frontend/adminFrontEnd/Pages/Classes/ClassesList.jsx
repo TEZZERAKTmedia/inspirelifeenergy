@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { adminApi } from '../../config/axios';
 import LoadingPage from '../../Components/loading';
 import EditClassForm from './EditClassForm';
-import "./ClassList.css"; // Include styles for modal and grid
+import "./ClassesList.css"; // Include styles for modal and grid
 
 const ClassList = ({ refreshCalendar }) => {
   const [classes, setClasses] = useState([]);
