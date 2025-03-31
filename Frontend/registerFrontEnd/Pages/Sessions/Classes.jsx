@@ -81,7 +81,10 @@ const ClassesList = () => {
           >
             <h2 className='modal-item'>{selectedClass.name}</h2>
             <p className='modal-item'>{selectedClass.description}</p>
-            <p className='modal-item'>Date: {selectedClass.class_date}</p>
+            {/* Refactored: Compute date from start_time */}
+            <p className='modal-item'>
+              Date: {new Date(selectedClass.start_time).toLocaleDateString()}
+            </p>
             <p className='modal-item'>
               Time:{' '}
               {new Date(selectedClass.start_time).toLocaleTimeString([], {
