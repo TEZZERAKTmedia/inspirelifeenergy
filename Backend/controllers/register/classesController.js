@@ -10,7 +10,7 @@ const getAllClasses = async (req, res) => {
           "id",
           "name",
           "price",
-          "class_date",
+          
           "start_time",  // ✅ Corrected
           "end_time",    // ✅ Corrected
           "color"

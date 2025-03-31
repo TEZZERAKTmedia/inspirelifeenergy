@@ -148,7 +148,7 @@ const createAccount = async (req, res) => {
       console.warn("User with email already exists:", email);
       return res.status(409).json({
         message: 'This email is already registered. Please log in.',
-        redirectUrl: process.env.LOGIN_URL || 'http://localhost:3010/login',
+        redirectUrl: process.env.LOGIN_URL || 'https://inspire.tezzeraktmedia.space/login',
       });
     }
 
@@ -210,7 +210,7 @@ const createAccount = async (req, res) => {
     return res.status(200).json({
       message: 'Account created successfully, and initial message created.',
       verified: true,
-      redirectUrl: process.env.DEV_USER_URL || 'http://localhost:4001',
+      redirectUrl: process.env.DEV_USER_URL || 'https://user.inspire.tezzeraktmedia.space/login',
     });
 
   } catch (error) {
@@ -261,7 +261,7 @@ const generateLoginTokenAndSetCookie = async (req, res) => {
     // Respond with success and redirect URL
     return res.status(200).json({
       message: 'Login successful. Token and cookie generated.',
-      redirectUrl: process.env.DEV_USER_URL || 'http://localhost:4001', // Redirect to user dashboard
+      redirectUrl: process.env.DEV_USER_URL || 'https://user.inspire.tezzeraktmedia.space/login', // Redirect to user dashboard
     });
   } catch (error) {
     console.error('Login and cookie generation error:', error);
