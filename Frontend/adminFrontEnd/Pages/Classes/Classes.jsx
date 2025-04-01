@@ -3,6 +3,7 @@ import { adminApi } from "../../config/axios";
 import ClassesList from "./ClassesList";
 import ClassCalendar from "./Calendar";
 import { motion } from "framer-motion";
+import LoadingPage from "../../Components/loading";
 import "./ClassForm.css";
 
 // Helper to get current date and time formatted for datetime-local inputs
@@ -16,24 +17,24 @@ const getCurrentDateTimeLocal = () => {
 };
 
 const ClassForm = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: "",
     price: "",
     start_time: getCurrentDateTimeLocal(),
     end_time: getCurrentDateTimeLocal(),
     color: "#3498db",
     frequency: "one-time",
-    // Change from boolean to string so we can store "class" or "subscription"
     subscription_required: "class", 
     frequency_start_date: "",
     frequency_end_date: ""
-  });
+  };
 
+  const [formData, setFormData] = useState(initialFormData);
   const [refreshCalendar, setRefreshCalendar] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    // For radio buttons (and checkboxes) and other inputs
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value
@@ -52,7 +53,7 @@ const ClassForm = () => {
 
     const dataToSend = {
       ...formData,
-      price: priceValue, // now a number
+      price: priceValue,
     };
 
     // For one-time classes, remove recurrence fields
@@ -64,13 +65,24 @@ const ClassForm = () => {
     console.log("Submitting data:", dataToSend);
 
     try {
+      setLoading(true);
       await adminApi.post("/admin-classes", dataToSend);
       alert("Class created successfully!");
       setRefreshCalendar((prev) => !prev);
+      // Clear the form by resetting to initial values
+      setFormData(initialFormData);
     } catch (error) {
       console.error("Error creating class:", error);
+      alert("Error creating class. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
+
+  // If loading, show the loading page
+  if (loading) {
+    return <LoadingPage />;
+  }
 
   return (
     <motion.div 

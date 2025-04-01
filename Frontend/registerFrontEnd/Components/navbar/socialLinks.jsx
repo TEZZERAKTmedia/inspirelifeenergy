@@ -19,7 +19,7 @@ const SocialLinks = () => {
     {
       id: 2,
       platform: 'Instagram',
-      url: 'https://www.instagram.com/inspiredlifeenergy/'
+      url: 'https://www.instagram.com/inspiredlifeenergy'
     },
 
     {

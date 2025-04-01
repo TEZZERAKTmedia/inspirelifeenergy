@@ -1,1 +1,0 @@
-import{j as a}from"./index-CTicE-h8.js";const i="/assets/loading-DpQzakVo.gif",n=()=>a.jsx("div",{className:"loading-page",children:a.jsxs("div",{className:"loading-section",children:[a.jsx("img",{className:"animation",src:i,alt:"Loading animation"}),a.jsx("p",{children:"Loading, please wait..."})]})});export{n as L};

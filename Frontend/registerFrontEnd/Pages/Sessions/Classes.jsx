@@ -44,7 +44,7 @@ const ClassesList = () => {
 
   return (
     <div className="classes-list-container">
-      <h1>Available Classes</h1>
+      <h2>Available Classes</h2>
 
       {error && <div className="classes-error">{error}</div>}
 
