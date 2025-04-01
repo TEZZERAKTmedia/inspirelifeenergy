@@ -5,12 +5,22 @@ import ClassCalendar from "./Calendar";
 import { motion } from "framer-motion";
 import "./ClassForm.css";
 
+// Helper to get current date and time formatted for datetime-local inputs
+const getCurrentDateTimeLocal = () => {
+  const now = new Date();
+  // Adjust to local time by subtracting the timezone offset
+  const offset = now.getTimezoneOffset();
+  const localDate = new Date(now.getTime() - offset * 60 * 1000);
+  // Format as "YYYY-MM-DDTHH:MM"
+  return localDate.toISOString().slice(0, 16);
+};
+
 const ClassForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-    start_time: "",
-    end_time: "",
+    start_time: getCurrentDateTimeLocal(),
+    end_time: getCurrentDateTimeLocal(),
     color: "#3498db",
     frequency: "one-time",
     // Change from boolean to string so we can store "class" or "subscription"
@@ -23,7 +33,7 @@ const ClassForm = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    // For radio buttons (which we'll use for subscription_required) and other inputs
+    // For radio buttons (and checkboxes) and other inputs
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value
@@ -103,6 +113,7 @@ const ClassForm = () => {
               id="start_time"
               type="datetime-local"
               name="start_time"
+              value={formData.start_time}
               onChange={handleChange}
               required
             />
@@ -114,6 +125,7 @@ const ClassForm = () => {
               id="end_time"
               type="datetime-local"
               name="end_time"
+              value={formData.end_time}
               onChange={handleChange}
               required
             />
@@ -212,12 +224,10 @@ const ClassForm = () => {
           Create Class
         </motion.button>
       </form>
-      <div >
+      <div>
         <h2>Calendar</h2>
-      <ClassCalendar refreshCalendar={refreshCalendar} />
+        <ClassCalendar refreshCalendar={refreshCalendar} />
       </div>
-
-      
       <ClassesList refreshCalendar={refreshCalendar} />
     </motion.div>
   );
