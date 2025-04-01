@@ -10,6 +10,7 @@ import SocialsGif from '../assets/socials.gif';
 import EmailGif from '../assets/email.gif';
 import UsersGif from '../assets/users.gif';
 import InvoicesGif from '../assets/invoice.gif';
+import ClassesWebp from '../assets/one-on-one.webp';
 
 const Home = () => {
   return (
@@ -46,7 +47,7 @@ const Home = () => {
                 <h3>Classes</h3>
                 <img 
                 style={{width: '100%', height: 'auto'}}
-                src={OrdersGif}/>
+                src={ClassesWebp}/>
                 <p>Create classes</p>
                 
                
